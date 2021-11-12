@@ -74,28 +74,28 @@ test("filter", () => {
 });
 
 test("fromArray 1", () => {
-  let z = fromArray([1, 3, 4, 5], 1);
+  let z = fromArray(1)([1, 3, 4, 5]);
   expect(z.first).toStrictEqual([1]);
   expect(z.current).toStrictEqual(3);
   expect(z.rest).toStrictEqual([4, 5]);
 });
 
 test("fromArray 2", () => {
-  let z = fromArray([1], 1);
+  let z = fromArray(1)([1]);
   expect(z.first).toStrictEqual([]);
   expect(z.current).toStrictEqual(1);
   expect(z.rest).toStrictEqual([]);
 });
 
 test("fromArray 3", () => {
-  let z = fromArray([1], 0);
+  let z = fromArray(0)([1]);
   expect(z.first).toStrictEqual([]);
   expect(z.current).toStrictEqual(1);
   expect(z.rest).toStrictEqual([]);
 });
 
 test("fromArray 4", () => {
-  let z = fromArray([1, 2, 3, 4], 3);
+  let z = fromArray(3)([1, 2, 3, 4]);
   expect(z.first).toStrictEqual([1, 2, 3]);
   expect(z.current).toStrictEqual(4);
   expect(z.rest).toStrictEqual([]);
