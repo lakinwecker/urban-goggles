@@ -7,6 +7,7 @@ import {
   filter,
   fromArray,
   includes,
+  HasEquality,
 } from "./zipperlist";
 
 test("Creation and access", () => {
@@ -117,15 +118,21 @@ test("filter all true ", () => {
 });*/
 
 test("includes", () => {
+  const numberEquality: HasEquality<number> = {
+    equals: (t1: number, t2: number) => t1 === t2,
+  };
   let z = ZipperList([1], 2, [3, 4, 5]);
-  expect(includes(z, 1)).toBeTruthy();
-  expect(includes(z, 1000)).toBeFalsy();
+  expect(includes(numberEquality)(z, 1)).toBeTruthy();
+  expect(includes(numberEquality)(z, 1000)).toBeFalsy();
 });
 
 test("includes 2", () => {
+  const userEquality: HasEquality<{ name: string }> = {
+    equals: (t1: { name: string }, t2: { name: string }) => t1.name === t2.name,
+  };
   let z = ZipperList([{ name: "ummer" }], { name: "ben" }, []);
-  expect(includes(z, { name: "ummer" })).toBeTruthy();
-  expect(includes(z, { name: "lakin" })).toBeFalsy();
+  expect(includes(userEquality)(z, { name: "ummer" })).toBeTruthy();
+  expect(includes(userEquality)(z, { name: "lakin" })).toBeFalsy();
 });
 
 export {};

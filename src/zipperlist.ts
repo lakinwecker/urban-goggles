@@ -56,10 +56,11 @@ export const filter =
   };
 
 export type HasEquality<T> = {
-  value: T;
   equals: (t1: T, t2: T) => boolean;
 };
 
-export const includes = <T>(z: ZipperList<T>, t: HasEquality<T>): boolean => {
-  return toArray(z).filter((t1) => t.equals(t.value, t1)).length > 0;
-};
+export const includes =
+  <T>(proof: HasEquality<T>) =>
+  (z: ZipperList<T>, t: T): boolean => {
+    return toArray(z).filter((t1) => proof.equals(t, t1)).length > 0;
+  };
